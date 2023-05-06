@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Version;
 
 @Entity
 public class Numero {
@@ -21,6 +22,8 @@ public class Numero {
 	private StatusNumero status;
 	@ManyToOne
 	private Reserva reserva;
+	@Version
+	private Long versao;
 	
 	public void reservar(Reserva reserva) {
 		this.status = StatusNumero.RESERVADO;
@@ -47,5 +50,9 @@ public class Numero {
 	}
 	public Reserva getReserva() {
 		return reserva;
+	}
+
+	public Long getVersao() {
+		return versao;
 	}
 }

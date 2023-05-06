@@ -21,7 +21,7 @@ public class ControllerExceptionHandler {
 
 	@ExceptionHandler(ResponseStatusException.class)
 	public ResponseEntity<String> validation(ResponseStatusException ex) {
-		return ResponseEntity.badRequest().body(ex.getMessage());
+		return ResponseEntity.unprocessableEntity().body(ex.getMessage());
 	}
 	
 	@ExceptionHandler(ObjectOptimisticLockingFailureException.class)

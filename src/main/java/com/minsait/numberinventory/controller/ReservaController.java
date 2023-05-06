@@ -39,7 +39,7 @@ public class ReservaController {
 		sleep(5000);
 		var quantidadeDisponivel = numeros.size(); 
 		if(quantidadeDisponivel < request.quantidade())
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, 
+			throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, 
 					"Não há números disponíveis! Quantidade de números disponíveis: " + quantidadeDisponivel);
 		var reserva = request.toModel(numeros);
 		

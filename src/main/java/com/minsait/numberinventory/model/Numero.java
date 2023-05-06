@@ -48,4 +48,11 @@ public class Numero {
 	public Reserva getReserva() {
 		return reserva;
 	}
+
+	@Override
+	public String toString() {
+		return "Numero [id=" + id + ", ddd=" + ddd + ", prefixo=" + prefixo + ", sufixo=" + sufixo + ", codigo="
+				+ codigo + ", status=" + status + ", reserva=" + reserva + "]";
+	}
+	
 }

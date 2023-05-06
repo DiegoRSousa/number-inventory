@@ -3,6 +3,8 @@ package com.minsait.numberinventory.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +25,8 @@ import jakarta.validation.Valid;
 @RequestMapping("reserva")
 public class ReservaController {
 	
+	private static final Logger logger = LoggerFactory.getLogger(ReservaController.class);
+	
 	private final NumeroRepository numeroRepository;
 	private final ReservaRepository reservaRepository;
 	
@@ -34,7 +38,12 @@ public class ReservaController {
 	@PostMapping
 	@Transactional
 	public ReservaResponse novaReserva(@RequestBody @Valid ReservaRequest request) {
+		var cpf = request.cpf();
+		logger.info("Buscando numeros para realizar reserva para o cpf: {}", cpf);
+		
 		var numeros = numeroRepository.buscarPorCodigoEQuantidade(request.codigo(), request.quantidade());
+		
+		logger.info("numeros encontrados: {} para o cpf: {}", numeros, cpf);
 		
 		sleep(5000);
 		var quantidadeDisponivel = numeros.size(); 
@@ -43,6 +52,8 @@ public class ReservaController {
 					"Não há números disponíveis! Quantidade de números disponíveis: " + quantidadeDisponivel);
 		var reserva = request.toModel(numeros);
 		
+		
+		logger.info("salvando reserva: {}", reserva);
 		reservaRepository.save(reserva);
 		numeros.forEach(n -> n.reservar(reserva));
 		numeroRepository.saveAll(numeros);

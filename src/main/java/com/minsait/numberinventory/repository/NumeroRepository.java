@@ -10,7 +10,7 @@ import com.minsait.numberinventory.model.Numero;
 
 public interface NumeroRepository extends JpaRepository<Numero, Long>{
 	
-	@Query(value = "select * from Numero n where n.status = 'DISPONIVEL' and n.codigo = :codigo limit :quantidade", nativeQuery = true)
+	@Query(value = "select * from Numero n where n.status = 'DISPONIVEL' and n.codigo = :codigo for update limit :quantidade", nativeQuery = true)
 	List<Numero> buscarPorCodigoEQuantidade(@Param("codigo") String codigo, @Param("quantidade")  int quantidade);
 
 	List<Numero> findByCodigo(String codigo);

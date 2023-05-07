@@ -55,4 +55,10 @@ public class Numero {
 	public Long getVersao() {
 		return versao;
 	}
+	@Override
+	public String toString() {
+		return "Numero [id=" + id + ", ddd=" + ddd + ", prefixo=" + prefixo + ", sufixo=" + sufixo + ", codigo="
+				+ codigo + ", status=" + status + ", reserva=" + reserva + ", versao=" + versao + "]";
+	}
+	
 }

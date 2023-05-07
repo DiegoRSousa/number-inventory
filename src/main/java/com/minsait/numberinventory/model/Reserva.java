@@ -44,4 +44,9 @@ public class Reserva {
 	public List<Numero> getNumeros() {
 		return numeros;
 	}
+
+	@Override
+	public String toString() {
+		return "Reserva [id=" + id + ", cpf=" + cpf + ", numeros=" + numeros + "]";
+	}
 }

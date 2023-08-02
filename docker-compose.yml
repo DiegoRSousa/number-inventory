@@ -1,6 +1,6 @@
 version: '3'
 services:
-  mysql-symphony-api:
+  postgres-number-inventory:
     image: postgres:12-alpine
     container_name: postgres-number-inventory
     volumes:

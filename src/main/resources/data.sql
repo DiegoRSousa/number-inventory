@@ -4,6 +4,12 @@ insert into numero (ddd, prefixo, sufixo, codigo, status) values
 	 ('83','8132','5122','PB','DISPONIVEL'),
 	 ('83','8123','5334','PB','DISPONIVEL'),
 	 ('83','8123','5033','PB','DISPONIVEL'),
+	 ('83','8182','5542','PB','DISPONIVEL'),
+	 ('83','8193','5332','PB','DISPONIVEL'),
+	 ('83','8199','5049','PB','DISPONIVEL'),
 	 ('11','8181','1122','SP','DISPONIVEL'),
 	 ('11','8181','3344','SP','DISPONIVEL'),
-	 ('11','8123','5566','SP','DISPONIVEL');
+	 ('11','8123','5566','SP','DISPONIVEL'),
+	 ('11','8171','1342','SP','DISPONIVEL'),
+	 ('11','8171','3154','SP','DISPONIVEL'),
+	 ('11','8183','9076','SP','DISPONIVEL');

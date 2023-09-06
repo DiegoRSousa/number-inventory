@@ -15,4 +15,7 @@ public interface NumeroRepository extends JpaRepository<Numero, Long>{
 
 	List<Numero> findByCodigo(String codigo);
 
+	@Query("select n from Numero n where n.numeroCompleto like %:parteDoNumero%")
+	List<Numero> buscarPorParteDoNumero(@Param("parteDoNumero") String parteDoNumero);
+
 }

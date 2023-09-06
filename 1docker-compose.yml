@@ -16,17 +16,4 @@ services:
           cpus: '0.25'
           memory: '1.25GB'
       
-  src-number-inventory:
-    image: number-inventory:v4
-    container_name: src_number_inventory
-    environment:
-      DATABASE_URL: jdbc:postgresql://postgres-number-inventory:5432/number_inventory
-    ports:
-      - 8080:8080
-    depends_on:
-      - postgres-number-inventory
-    deploy:
-      resources:
-        limits:
-          cpus: '0.25'
-          memory: '1.25GB'
+  

@@ -17,11 +17,23 @@ public class Numero {
 	private String prefixo;
 	private String sufixo;
 	private String codigo;
+	private String numeroCompleto;
 	@Enumerated(EnumType.STRING)
 	private StatusNumero status;
 	@ManyToOne
 	private Reserva reserva;
 	
+	public Numero() {}
+	
+	public Numero(String ddd, String prefixo, String sufixo, String codigo) {
+		this.ddd = ddd;
+		this.prefixo = prefixo;
+		this.sufixo = sufixo;
+		this.codigo = codigo;
+		this.numeroCompleto = ddd+prefixo+sufixo; 
+		this.status = StatusNumero.DISPONIVEL;
+	}
+
 	public void reservar(Reserva reserva) {
 		this.status = StatusNumero.RESERVADO;
 		this.reserva = reserva;
@@ -42,6 +54,11 @@ public class Numero {
 	public String getCodigo() {
 		return codigo;
 	}
+	
+	public String getNumeroCompleto() {
+		return numeroCompleto;
+	}
+
 	public StatusNumero getStatus() {
 		return status;
 	}

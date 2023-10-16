@@ -15,5 +15,9 @@ services:
         limits:
           cpus: '0.25'
           memory: '1.25GB'
-      
   
+  redis-number-inventory:
+    image: redis:6.2.0-alpine
+    container_name: redis-number-inventory
+    ports:
+      - 6379:6379

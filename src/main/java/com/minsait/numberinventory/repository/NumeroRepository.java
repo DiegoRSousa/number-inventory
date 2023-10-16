@@ -2,6 +2,8 @@ package com.minsait.numberinventory.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,6 +18,6 @@ public interface NumeroRepository extends JpaRepository<Numero, Long>{
 	List<Numero> findByCodigo(String codigo);
 
 	@Query("select n from Numero n where n.numeroCompleto like %:parteDoNumero%")
-	List<Numero> buscarPorParteDoNumero(@Param("parteDoNumero") String parteDoNumero);
+	Page<Numero> buscarPorParteDoNumero(@Param("parteDoNumero") String parteDoNumero, Pageable paginacao);
 
 }

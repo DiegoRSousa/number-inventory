@@ -14,19 +14,32 @@ services:
       resources:
         limits:
           cpus: '0.25'
-          memory: '1.25GB'
-      
-  src-number-inventory:
-    image: number-inventory:v4
-    container_name: src_number_inventory
-    environment:
-      DATABASE_URL: jdbc:postgresql://postgres-number-inventory:5432/number_inventory
+          memory: '0.5GB'
+  
+  redis-number-inventory:
+    image: redis:6.2.0-alpine
+    container_name: redis-number-inventory
     ports:
-      - 8080:8080
-    depends_on:
-      - postgres-number-inventory
+      - 6379:6379
     deploy:
       resources:
         limits:
           cpus: '0.25'
-          memory: '1.25GB'
+          memory: '0.5GB'
+          
+  src-number-inventory:
+    image: number-inventory:vps
+    container_name: src_number_inventory
+    environment:
+      DATABASE_URL: jdbc:postgresql://postgres-number-inventory:5432/number_inventory
+      REDIS_HOST: 'redis-number-inventory'
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres-number-inventory
+      - redis-number-inventory
+    deploy:
+      resources:
+        limits:
+          cpus: '0.75'
+          memory: '1.5GB'

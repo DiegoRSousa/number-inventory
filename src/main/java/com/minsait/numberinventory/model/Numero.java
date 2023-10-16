@@ -1,5 +1,8 @@
 package com.minsait.numberinventory.model;
 
+import java.io.Serializable;
+import java.util.UUID;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -9,10 +12,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Numero {
+public class Numero implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private UUID uuid;
 	private String ddd;
 	private String prefixo;
 	private String sufixo;
@@ -26,6 +32,7 @@ public class Numero {
 	public Numero() {}
 	
 	public Numero(String ddd, String prefixo, String sufixo, String codigo) {
+		this.uuid = UUID.randomUUID();
 		this.ddd = ddd;
 		this.prefixo = prefixo;
 		this.sufixo = sufixo;
@@ -41,6 +48,9 @@ public class Numero {
 	
 	public Long getId() {
 		return id;
+	}
+	public UUID getUuid() {
+		return uuid;
 	}
 	public String getDdd() {
 		return ddd;
@@ -66,10 +76,10 @@ public class Numero {
 		return reserva;
 	}
 
-	@Override
-	public String toString() {
-		return "Numero [id=" + id + ", ddd=" + ddd + ", prefixo=" + prefixo + ", sufixo=" + sufixo + ", codigo="
-				+ codigo + ", status=" + status + ", reserva=" + reserva + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Numero [id=" + id + ", ddd=" + ddd + ", prefixo=" + prefixo + ", sufixo=" + sufixo + ", codigo="
+//				+ codigo + ", status=" + status + ", reserva=" + reserva + "]";
+//	}
 	
 }

@@ -1,12 +1,12 @@
 create table reserva (
-    id serial,
+    id int AUTO_INCREMENT,
     cpf varchar(11) not null,
     primary key(id)
 );
 
 
 create table numero (
-    id serial,
+    id int AUTO_INCREMENT,
     ddd varchar(2) not null,
     prefixo varchar(4) not null,
     sufixo varchar(4) not null,

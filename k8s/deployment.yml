@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: number-inventory-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: number-inventory
+  template:
+    metadata:
+      labels:
+        app: number-inventory
+    spec:
+      containers:
+      - name: number-inventory
+        image: number-inventory:v4
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+        envFrom:
+          - configMapRef:
+              name: number-inventory-configmap
+          - secretRef:
+              name: number-inventory-secret
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          periodSeconds: 10
+          failureThreshold: 3
+          initialDelaySeconds: 60
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          periodSeconds: 10
+          failureThreshold: 3
+          initialDelaySeconds: 60
+

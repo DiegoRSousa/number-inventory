@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: bd-configmap
-data:
-  POSTGRES_PASSWORD: 'postgres'

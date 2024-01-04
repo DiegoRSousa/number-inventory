@@ -1,0 +1,55 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+spec:
+  selector:
+    app: mysql
+  ports:
+  - port: 3306
+  clusterIP: None
+
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  serviceName: mysql
+  replicas: 1
+  minReadySeconds: 10
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: mysql
+        image: mysql:8
+        ports:
+        - containerPort: 3306
+          name: mysql
+        env:
+          - name: MYSQL_DATABASE
+            valueFrom:
+              configMapKeyRef:
+                key: DB_DATABASE
+                name: vollmed-configmap
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: DB_PASSWORD
+                name: vollmed-secret  
+        volumeMounts:
+          - name: mysql-ps
+            mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-ps
+          persistentVolumeClaim: 
+            claimName: volume-mysql
+          
